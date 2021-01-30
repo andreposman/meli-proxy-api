@@ -1,0 +1,23 @@
+{
+    "paths": [
+        {
+            "path": "/products",
+            "rateLimit": "15"
+        },
+        {
+            "path": "/client",
+            "rateLimit": "10"
+        },
+        {
+            "path": "/info",
+            "rateLimit": "20"
+        },
+        {
+            "path": "/settings",
+            "rateLimit": "5"
+        }
+    ],
+    "ip": {
+        "rateLimit": "5"
+    }
+}
