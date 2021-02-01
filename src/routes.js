@@ -4,7 +4,8 @@ const {rateLimitByIp, rateLimitByPath, rateLimitByPathIp} = require('../src/prox
 
 
 // routes.get('/', proxyController.redirectUser)
-routes.get('/products', rateLimitByPathIp, proxyController.redirectUser)
+routes.get('/products', proxyController.redirectUser)
+routes.get('/productss', proxyController.redirectUser)
 
 
 module.exports = routes

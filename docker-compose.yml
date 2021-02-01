@@ -1,6 +1,36 @@
 version: "3"
 
 services:
+  redis:
+    image: "redis:alpine"
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.5.1
+    ports:
+      - 2181:2181
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:5.5.1
+    ports:
+      - 9091:9091
+    links:
+      - "zookeeper:zookeper"
+    environment:
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_AUTO_LEADER_REBALANCE_ENABLE: "true"
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:29091,PLAINTEXT_HOST://localhost:9091"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_CREATE_TOPICS: "proxy-statistics:3:1"
   meli-proxy-api:
     build:
       context: .
@@ -8,9 +38,4 @@ services:
       - 3000:3000
     depends_on:
       - redis
-  redis:
-    image: "redis:alpine"
-    ports:
-      - 6379:6379
-    expose:
-      - 6379
+      - kafka

@@ -197,7 +197,6 @@ const rateLimitByPathIp = (req, res, next) => {
             //  if no record is found , create a new record for user and store to redis
             console.log('record', record);
             if (record == null) {
-                console.log('to no if');
                 let newRecord = [];
                 let requestLog = {
                     requestTimeStamp: currentRequestTime.unix(),

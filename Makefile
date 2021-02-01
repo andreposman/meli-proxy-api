@@ -20,7 +20,7 @@ l:
 .PHONY: r
 
 r:
-	docker-compose down && docker-compose up -d --build && docker-compose logs -f
+	clear && docker-compose down && docker-compose up -d --build && docker-compose logs -f
 
 
 .PHONY: db
