@@ -7,15 +7,12 @@ module.exports = {
         // amqp.produce()
 
         userData = {
+            "url": data.url,
             "path": data.path,
             "ip": data.ip,
             "mergeIpPath": data.mergeIpPath
         }
         console.log(userData);
-
-        // proxyRepository.createRules(userData)
-        // proxyRepository.getRules()
-
         return userData
     }
 }

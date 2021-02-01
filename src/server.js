@@ -1,5 +1,4 @@
 const app = require('./app');
-const amqp = require('amqplib');
 require("dotenv").config();
 
 app.listen(process.env.PORT || 3001, (err) => {
