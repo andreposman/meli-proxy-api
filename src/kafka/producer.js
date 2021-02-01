@@ -2,8 +2,9 @@ const { Kafka } = require('kafkajs')
 
 const kafka = new Kafka({
     clientId: 'meli-proxy-api',
-    brokers: ['kafka:29091']
+    brokers: ['broker:9092']
 })
+
 
 const admin = kafka.admin()
 
@@ -25,14 +26,27 @@ const producer = kafka.producer()
 
 const produceStats = async (data) => {
     await producer.connect()
+    console.log('Producing Message')
     await producer.send({
         topic: 'proxy-statistics',
-        messages: [{ key: 'stats', value: JSON.stringify(data) }]
+        messages: [{ value: JSON.stringify(data) }]
     })
 
     await producer.disconnect()
 }
 
+module.exports = produceStats
+
+// const produceStats = async (data) => {
+//     await producer.connect()
+//     await producer.send({
+//         topic: 'proxy-statistics',
+//         messages: [{ key: 'stats', value: JSON.stringify(data) }]
+//     })
+
+//     await producer.disconnect()
+// }
+
 // run()
 
-module.exports = produceStats
+// module.exports = produceStats

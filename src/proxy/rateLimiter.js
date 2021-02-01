@@ -1,9 +1,6 @@
 const moment = require('moment')
 const redis = require('redis')
 const ERROR_MESSAGES = require('../helpers/messages');
-const proxyRules = require('../../proxyRules.json');
-
-const redisClient = redis.createClient({ host: 'redis' });
 
 const IP_WINDOW_SIZE_IN_SECONDS = process.env.IP_WINDOW_LOG_INTERVAL_SECS;
 const IP_MAX_WINDOW_REQUEST_COUNT = process.env.IP_MAX_WINDOW_REQ_COUNT;
@@ -17,6 +14,7 @@ const IP_PATH_WINDOW_SIZE_IN_SECONDS = process.env.IP_PATH_WINDOW_SIZE_SECS;
 const IP_PATH_MAX_WINDOW_REQUEST_COUNT = process.env.IP_PATH_MAX_WINDOW_REQ_COUNT;
 const IP_PATH_WINDOW_LOG_INTERVAL_IN_SECONDS = process.env.IP_PATH_WINDOW_LOG_INTERVAL_SECS;
 
+const redisClient = redis.createClient({ host: 'redis' });
 
 const rateLimitByIp = (req, res, next) => {
     try {

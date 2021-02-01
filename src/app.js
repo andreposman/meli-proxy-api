@@ -5,6 +5,7 @@ const routes = require('./routes');
 const jsend = require('jsend');
 const { rateLimitByIp, rateLimitByPath, rateLimitByPathIp } = require('../src/proxy/rateLimiter')
 const { logStats } = require('./kafka/logger');
+// const pathValidator = require('./helpers/validator');
 
 class AppController {
 
@@ -18,6 +19,7 @@ class AppController {
         this.express.use(express.json())
         this.express.use(helmet())
         this.express.use(jsend.middleware)
+        // this.express.use(pathValidator)
         this.express.use(logStats)
         this.express.use(rateLimitByPathIp)
         this.express.use(rateLimitByPath)
