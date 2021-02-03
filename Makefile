@@ -34,7 +34,7 @@ db:
 
 #start db container and test locally 
 test:
-	docker-compose up -d db && yarn test
+	docker-compose up -d db && npm test --coverage --detectOpenHandles
 
 
 .PHONY: dev

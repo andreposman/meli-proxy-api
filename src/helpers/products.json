@@ -1,0 +1,24 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Macbook Pro 2021",
+            "Seller": "Apple"
+        },
+        {
+            "id": 2,
+            "name": "GoPro Hero 8",
+            "Seller": "GoPro"
+        },
+        {
+            "id": 3,
+            "name": "Razer Blade Pro 17 ",
+            "Seller": "Razer"
+        },
+        {
+            "id": 4,
+            "name": "Paçoca",
+            "Seller": "Paçoquita"
+        }
+    ]
+}

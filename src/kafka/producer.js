@@ -11,22 +11,12 @@ const admin = kafka.admin()
 const producer = kafka.producer()
 // remember to connect and disconnect when you are done
 
-// const run = async () => {
-//     await admin.connect()
-//     await admin.createTopics({
-//         waitForLeaders: true,
-//         validateOnly: true,
-//         topics: [
-//             { topic: 'proxy-statistics' },
-//         ],
-//     })
-//     await admin.disconnect()
-
-// }
-
 const produceStats = async (data) => {
     await producer.connect()
+
     console.log('Producing Message')
+    console.log(JSON.stringify(data));
+
     await producer.send({
         topic: 'proxy-statistics',
         messages: [{ value: JSON.stringify(data) }]
@@ -36,17 +26,3 @@ const produceStats = async (data) => {
 }
 
 module.exports = produceStats
-
-// const produceStats = async (data) => {
-//     await producer.connect()
-//     await producer.send({
-//         topic: 'proxy-statistics',
-//         messages: [{ key: 'stats', value: JSON.stringify(data) }]
-//     })
-
-//     await producer.disconnect()
-// }
-
-// run()
-
-// module.exports = produceStats

@@ -1,18 +1,19 @@
 const moment = require('moment')
 const redis = require('redis')
 const ERROR_MESSAGES = require('../helpers/messages');
+require('dotenv').config()
 
-const IP_WINDOW_SIZE_IN_SECONDS = 50000;
-const IP_MAX_WINDOW_REQUEST_COUNT = 50000;
-const IP_WINDOW_LOG_INTERVAL_IN_SECONDS = 50000;
+const IP_WINDOW_SIZE_IN_SECONDS = process.env.IP_WINDOW_SIZE_SECS;
+const IP_MAX_WINDOW_REQUEST_COUNT = process.env.IP_MAX_WINDOW_REQ_COUNT;
+const IP_WINDOW_LOG_INTERVAL_IN_SECONDS = process.env.IP_WINDOW_LOG_INTERVAL_SECS;
 
-const PATH_WINDOW_SIZE_IN_SECONDS = 50000
-const PATH_MAX_WINDOW_REQUEST_COUNT = 50000
-const PATH_WINDOW_LOG_INTERVAL_IN_SECONDS = 50000
+const PATH_WINDOW_SIZE_IN_SECONDS = process.env.PATH_WINDOW_SIZE_SECS;
+const PATH_MAX_WINDOW_REQUEST_COUNT = process.env.PATH_MAX_WINDOW_REQ_COUNT;
+const PATH_WINDOW_LOG_INTERVAL_IN_SECONDS = process.env.PATH_WINDOW_LOG_INTERVAL_SECS;
 
-const IP_PATH_WINDOW_SIZE_IN_SECONDS = 50000
-const IP_PATH_MAX_WINDOW_REQUEST_COUNT = 50000
-const IP_PATH_WINDOW_LOG_INTERVAL_IN_SECONDS = 50000
+const IP_PATH_WINDOW_SIZE_IN_SECONDS = process.env.IP_PATH_WINDOW_SIZE_SECS;
+const IP_PATH_MAX_WINDOW_REQUEST_COUNT = process.env.IP_PATH_MAX_WINDOW_REQ_COUNT;
+const IP_PATH_WINDOW_LOG_INTERVAL_IN_SECONDS = process.env.IP_PATH_WINDOW_LOG_INTERVAL_SECS;
 
 const redisClient = redis.createClient({ host: 'redis' });
 
@@ -39,7 +40,6 @@ const rateLimitByIp = (req, res, next) => {
                 redisClient.set(req.headers.host, JSON.stringify(newRecord));
                 next();
             } else {
-                console.log('to no else');
                 // if record is found, parse it's value and calculate number of requests users has made within the last window
                 let data = JSON.parse(record);
 
@@ -47,17 +47,17 @@ const rateLimitByIp = (req, res, next) => {
                     .subtract(IP_WINDOW_SIZE_IN_SECONDS, 'seconds')
                     .unix();
 
-                console.log('windowStartTimestamp', windowStartTimestamp);
+                console.log('\nwindowStartTimestamp', windowStartTimestamp);
 
                 let requestsWithinWindow = data.filter(entry => {
                     return entry.requestTimeStamp > windowStartTimestamp;
                 });
-                console.log('requestsWithinWindow', requestsWithinWindow);
+                console.log('\nrequestsWithinWindow', requestsWithinWindow);
                 let totalWindowRequestsCount = requestsWithinWindow.reduce((accumulator, entry) => {
                     return accumulator + entry.requestCount;
                 }, 0);
 
-                console.log('totalWindowRequestsCount', totalWindowRequestsCount);
+                console.log('\ntotalWindowRequestsCount', totalWindowRequestsCount);
 
                 // if number of requests made is greater than or equal to the desired maximum, return error
                 if (totalWindowRequestsCount >= IP_MAX_WINDOW_REQUEST_COUNT) {
@@ -111,7 +111,7 @@ const rateLimitByPath = (req, res, next) => {
             if (err) throw err;
             const currentRequestTime = moment();
             //  if no record is found , create a new record for user and store to redis
-            console.log('record', record);
+            console.log('\nrecord', record);
             if (record == null) {
                 console.log('to no if');
                 let newRecord = [];
@@ -123,7 +123,6 @@ const rateLimitByPath = (req, res, next) => {
                 redisClient.set(req.path, JSON.stringify(newRecord));
                 next();
             } else {
-                console.log('to no else');
                 // if record is found, parse it's value and calculate number of requests users has made within the last window
                 let data = JSON.parse(record);
 
@@ -131,17 +130,17 @@ const rateLimitByPath = (req, res, next) => {
                     .subtract(PATH_WINDOW_SIZE_IN_SECONDS, 'seconds')
                     .unix();
 
-                console.log('windowStartTimestamp', windowStartTimestamp);
+                console.log('\nwindowStartTimestamp', windowStartTimestamp);
 
                 let requestsWithinWindow = data.filter(entry => {
                     return entry.requestTimeStamp > windowStartTimestamp;
                 });
-                console.log('requestsWithinWindow', requestsWithinWindow);
+                console.log('\nrequestsWithinWindow', requestsWithinWindow);
                 let totalWindowRequestsCount = requestsWithinWindow.reduce((accumulator, entry) => {
                     return accumulator + entry.requestCount;
                 }, 0);
 
-                console.log('totalWindowRequestsCount', totalWindowRequestsCount);
+                console.log('\ntotalWindowRequestsCount', totalWindowRequestsCount);
 
                 // if number of requests made is greater than or equal to the desired maximum, return error
                 if (totalWindowRequestsCount >= PATH_MAX_WINDOW_REQUEST_COUNT) {
@@ -193,7 +192,7 @@ const rateLimitByPathIp = (req, res, next) => {
             if (err) throw err;
             const currentRequestTime = moment();
             //  if no record is found , create a new record for user and store to redis
-            console.log('record', record);
+            console.log('\nrecord', record);
             if (record == null) {
                 let newRecord = [];
                 let requestLog = {
@@ -211,17 +210,17 @@ const rateLimitByPathIp = (req, res, next) => {
                     .subtract(IP_PATH_WINDOW_SIZE_IN_SECONDS, 'seconds')
                     .unix();
 
-                console.log('windowStartTimestamp', windowStartTimestamp);
+                console.log('\nwindowStartTimestamp', windowStartTimestamp);
 
                 let requestsWithinWindow = data.filter(entry => {
                     return entry.requestTimeStamp > windowStartTimestamp;
                 });
-                console.log('requestsWithinWindow', requestsWithinWindow);
+                console.log('\nrequestsWithinWindow', requestsWithinWindow);
                 let totalWindowRequestsCount = requestsWithinWindow.reduce((accumulator, entry) => {
                     return accumulator + entry.requestCount;
                 }, 0);
 
-                console.log('totalWindowRequestsCount', totalWindowRequestsCount);
+                console.log('\ntotalWindowRequestsCount', totalWindowRequestsCount);
 
                 // if number of requests made is greater than or equal to the desired maximum, return error
                 if (totalWindowRequestsCount >= IP_PATH_MAX_WINDOW_REQUEST_COUNT) {
@@ -258,6 +257,4 @@ const rateLimitByPathIp = (req, res, next) => {
         next(error);
     }
 };
-
-
 module.exports = { rateLimitByIp, rateLimitByPath, rateLimitByPathIp }

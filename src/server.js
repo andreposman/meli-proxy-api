@@ -1,6 +1,17 @@
 const app = require('./app');
-require("dotenv").config();
+const gracefulShutown = require('http-graceful-shutdown');
+require('dotenv').config()
 
-app.listen(process.env.PORT || 3001, (err) => {
-    console.log(`\nServer running on http://localhost:${process.env.PORT}\n`);
-})
+const PORT = process.env.SERVER_PORT
+
+try {
+    const server = app.listen(PORT || 3001, (err) => {
+        console.log(`\nServer running on http://localhost:${PORT}\n`);
+    })
+
+    gracefulShutown(server)
+
+} catch (error) {
+    throw error
+}
+

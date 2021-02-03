@@ -2,9 +2,13 @@ const routes = require('express').Router();
 const proxyController = require('./proxy/proxyController')
 
 
-// routes.get('/', proxyController.redirectUser)
-routes.get('/products', proxyController.redirectUser)
-routes.get('/productss', proxyController.redirectUser)
+routes.get('/healthcheck', require('express-healthcheck')({
+    healthy: function () {
+        return { everything: 'is ok' };
+    }
+}));
+
+routes.get('/*', proxyController.redirectUser)
 
 
 module.exports = routes
