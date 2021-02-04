@@ -2,11 +2,11 @@ const moment = require('moment')
 const produceStats = require('./producer');
 
 
-const logStats = (req, res, next) => {
+const logStats = async (req, res, next) => {
     try {
         const timeStamp = moment().unix()
         const mergedPathIp = req.ip + req.path
-        
+
         const data = {
             ip: req.ip,
             path: req.path,
@@ -14,12 +14,12 @@ const logStats = (req, res, next) => {
             timeStamp
         }
 
-        produceStats(data)
+        await produceStats(data)
+
+        next()
     } catch (error) {
         next(error)
     }
-
-    next()
 };
 
 

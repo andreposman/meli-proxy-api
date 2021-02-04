@@ -5,11 +5,7 @@ const kafka = new Kafka({
     brokers: ['broker:9092']
 })
 
-
-const admin = kafka.admin()
-
 const producer = kafka.producer()
-// remember to connect and disconnect when you are done
 
 const produceStats = async (data) => {
     await producer.connect()

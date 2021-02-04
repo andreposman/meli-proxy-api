@@ -7,7 +7,6 @@ routes.get('/healthcheck', require('express-healthcheck')({
         return { everything: 'is ok' };
     }
 }));
-
 routes.get('/*', proxyController.redirectUser)
 
 

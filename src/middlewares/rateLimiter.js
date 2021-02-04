@@ -1,6 +1,6 @@
 const moment = require('moment')
-const redis = require('redis')
 const ERROR_MESSAGES = require('../helpers/messages');
+const client = require('../db/redis');
 require('dotenv').config()
 
 const IP_WINDOW_SIZE_IN_SECONDS = process.env.IP_WINDOW_SIZE_SECS;
@@ -15,16 +15,14 @@ const IP_PATH_WINDOW_SIZE_IN_SECONDS = process.env.IP_PATH_WINDOW_SIZE_SECS;
 const IP_PATH_MAX_WINDOW_REQUEST_COUNT = process.env.IP_PATH_MAX_WINDOW_REQ_COUNT;
 const IP_PATH_WINDOW_LOG_INTERVAL_IN_SECONDS = process.env.IP_PATH_WINDOW_LOG_INTERVAL_SECS;
 
-const redisClient = redis.createClient({ host: 'redis' });
-
 const rateLimitByIp = (req, res, next) => {
     try {
-        if (!redisClient) {
+        if (!client) {
             throw new Error('Redis client does not exist!');
             process.exit(1);
         }
         // fetch records of current user using IP address, returns null when no record is found
-        redisClient.get(req.ip, function (err, record) {
+        client.get(req.ip, function (err, record) {
             if (err) throw err;
             const currentRequestTime = moment();
             //  if no record is found , create a new record for user and store to redis
@@ -37,7 +35,7 @@ const rateLimitByIp = (req, res, next) => {
                     requestCount: 1
                 };
                 newRecord.push(requestLog);
-                redisClient.set(req.headers.host, JSON.stringify(newRecord));
+                client.set(req.headers.host, JSON.stringify(newRecord));
                 next();
             } else {
                 // if record is found, parse it's value and calculate number of requests users has made within the last window
@@ -87,7 +85,7 @@ const rateLimitByIp = (req, res, next) => {
                             requestCount: 1
                         });
                     }
-                    redisClient.set(req.ip, JSON.stringify(data));
+                    client.set(req.ip, JSON.stringify(data));
                     next();
                 }
             }
@@ -102,12 +100,12 @@ const rateLimitByIp = (req, res, next) => {
 const rateLimitByPath = (req, res, next) => {
     try {
         //validatePath
-        if (!redisClient) {
+        if (!client) {
             throw new Error('Redis client does not exist!');
             process.exit(1);
         }
         // fetch records of current user using path address, returns null when no record is found
-        redisClient.get(req.path, function (err, record) {
+        client.get(req.path, function (err, record) {
             if (err) throw err;
             const currentRequestTime = moment();
             //  if no record is found , create a new record for user and store to redis
@@ -120,7 +118,7 @@ const rateLimitByPath = (req, res, next) => {
                     requestCount: 1
                 };
                 newRecord.push(requestLog);
-                redisClient.set(req.path, JSON.stringify(newRecord));
+                client.set(req.path, JSON.stringify(newRecord));
                 next();
             } else {
                 // if record is found, parse it's value and calculate number of requests users has made within the last window
@@ -166,7 +164,7 @@ const rateLimitByPath = (req, res, next) => {
                             requestCount: 1
                         });
                     }
-                    redisClient.set(req.path, JSON.stringify(data));
+                    client.set(req.path, JSON.stringify(data));
                     next();
                 }
             }
@@ -183,12 +181,12 @@ const rateLimitByPathIp = (req, res, next) => {
         const mergedPathIp = req.ip + req.path || 'NOT_FOUND'
 
         console.log(mergedPathIp);
-        if (!redisClient) {
+        if (!client) {
             throw new Error('Redis client does not exist!');
             process.exit(1);
         }
         // fetch records of current user using path address, returns null when no record is found
-        redisClient.get(mergedPathIp, function (err, record) {
+        client.get(mergedPathIp, function (err, record) {
             if (err) throw err;
             const currentRequestTime = moment();
             //  if no record is found , create a new record for user and store to redis
@@ -200,7 +198,7 @@ const rateLimitByPathIp = (req, res, next) => {
                     requestCount: 1
                 };
                 newRecord.push(requestLog);
-                redisClient.set(mergedPathIp, JSON.stringify(newRecord));
+                client.set(mergedPathIp, JSON.stringify(newRecord));
                 next();
             } else {
                 // if record is found, parse it's value and calculate number of requests users has made within the last window
@@ -246,7 +244,7 @@ const rateLimitByPathIp = (req, res, next) => {
                             requestCount: 1
                         });
                     }
-                    redisClient.set(mergedPathIp, JSON.stringify(data));
+                    client.set(mergedPathIp, JSON.stringify(data));
                     next();
                 }
             }

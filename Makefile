@@ -1,44 +1,35 @@
+# start all
 .PHONY: u
-
-# start both api and db
 u:
 	docker-compose up 
 
+# down all
 .PHONY: d
-
-# drops both api and db
 d:
 	docker-compose down
 
-.PHONY: l
-
 #logs
+.PHONY: l
 l:
 	docker-compose logs -f
 
 # rebuild and up
 .PHONY: r
-
 r:
 	clear && docker-compose down && docker-compose up -d --build && docker-compose logs -f
 
 
+#start broker
+.PHONY: mq
+mq:
+	docker-compose up broker
+
+#start db
 .PHONY: db
-
-#start only db 
 db:
-	docker-compose up -d db
+	docker-compose up redis
 
-
-.PHONY: test
-
-#start db container and test locally 
-test:
-	docker-compose up -d db && npm test --coverage --detectOpenHandles
-
-
-.PHONY: dev
-
-#start db container and dev locally 
-dev:
-	docker-compose up -d db && yarn dev
+#start containers and test
+.PHONY: t
+t:
+	clear &&docker-compose up -d && npm test

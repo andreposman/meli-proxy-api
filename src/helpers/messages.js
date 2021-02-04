@@ -1,4 +1,4 @@
-const {FORBIDDEN} = require('http-status-codes').StatusCodes;
+const { TOO_MANY_REQUESTS } = require('http-status-codes').StatusCodes;
 require('dotenv').config()
 
 
@@ -13,16 +13,16 @@ const IP_PATH_MAX_WINDOW_REQUEST_COUNT = process.env.IP_PATH_MAX_WINDOW_REQ_COUN
 
 const ERROR_MESSAGES = {
     BLOCKED_IP: {
-        status: FORBIDDEN,
-        message: `⛔ The ${IP_MAX_WINDOW_REQUEST_COUNT} requests that you made, are too many! You are blocked for ${IP_WINDOW_SIZE_IN_SECONDS} seconds.`
+        status: TOO_MANY_REQUESTS,
+        message: `The ${IP_MAX_WINDOW_REQUEST_COUNT} requests that you made, are too many! You are blocked for ${IP_WINDOW_SIZE_IN_SECONDS} seconds.`
     },
     BLOCKED_PATH: {
-        status: FORBIDDEN,
-        message: `⛔ The ${PATH_MAX_WINDOW_REQUEST_COUNT} requests that you made, are too many! You are blocked for ${PATH_WINDOW_SIZE_IN_SECONDS} seconds.`
+        status: TOO_MANY_REQUESTS,
+        message: `The ${PATH_MAX_WINDOW_REQUEST_COUNT} requests that you made, are too many! You are blocked for ${PATH_WINDOW_SIZE_IN_SECONDS} seconds.`
     },
     BLOCKED_IP_PATH: {
-        status: FORBIDDEN,
-        message: `⛔ The ${IP_PATH_WINDOW_SIZE_IN_SECONDS} requests that you made, are too many! You are blocked for ${IP_PATH_MAX_WINDOW_REQUEST_COUNT} seconds.`
+        status: TOO_MANY_REQUESTS,
+        message: `The ${IP_PATH_WINDOW_SIZE_IN_SECONDS} requests that you made, are too many! You are blocked for ${IP_PATH_MAX_WINDOW_REQUEST_COUNT} seconds.`
     }
 }
 
