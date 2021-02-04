@@ -1,4 +1,4 @@
-const { logStats } = require('../kafka/logger');
+const { logStats } = require('../kafka/logStats');
 const moment = require('moment');
 
 const message = {

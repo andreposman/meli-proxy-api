@@ -57,13 +57,6 @@ services:
       KAFKA_BROKER_ID: ignored
       KAFKA_ZOOKEEPER_CONNECT: ignored
 
-  # json-server:
-  #   build: ./json-server
-  #   volumes:
-  #     - ./fakeServerData.json
-  #   ports:
-  #     - 3010:3010
-
   meli-proxy-api:
     build:
       context: .

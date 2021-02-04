@@ -1,9 +1,9 @@
 const app = require('../app');
 const request = require('supertest');
 const { OK, NOT_FOUND } = require('http-status-codes').StatusCodes;
-const fakeProducts = require('../helpers/products.json');
-const fakeComments = require('../helpers/comments.json');
-const fakeProfile = require('../helpers/profile.json');
+const fakeProducts = require('../helpers/products.fixture.json');
+const fakeComments = require('../helpers/comments.fixture.json');
+const fakeProfile = require('../helpers/profile.fixture.json');
 
 describe('Routes', () => {
     test('It should fetch /\products and return the data', () => {

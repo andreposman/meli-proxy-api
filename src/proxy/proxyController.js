@@ -1,7 +1,7 @@
 const { OK, NOT_FOUND } = require('http-status-codes').StatusCodes;
-const fakeProducts = require('../helpers/products.json');
-const fakeProfile = require('../helpers/profile.json');
-const fakeComments = require('../helpers/comments.json');
+const fakeProducts = require('../helpers/products.fixture.json');
+const fakeProfile = require('../helpers/profile.fixture.json');
+const fakeComments = require('../helpers/comments.fixture.json');
 
 module.exports = {
     redirectUser(req, res, next) {
