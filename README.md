@@ -121,6 +121,30 @@ So I ended up choosing Redis, but I believe the same problems that I mentioned a
 
 I left testing for last in the application development-cycle so with the time that had remaining I did only unit testing, and struggle a bit with Jest, especially warning me of open connections on Kafka, even tough the tests itself, passed I still couldn't figure it out this problem, If I hade more time I would have liked to do e2e and some integration tests like setting/getting keys and values from Redis, producing/consuming from Kafka, and the rate limit feature.
 
+<br>
+
+### Jest results
+
+<br>
+
+### Test Suites
+
+![jest-results](images/jest-results.png "jest-results")
+<br>
+
+<br>
+
+### Jest async operation
+
+
+![jest-async-error](images/jest_async_error.png "jest async error")
+
+<br>
+<br>
+
+### Load Test
+<br>
+
 Even though it was not necessary I was curious about how my application would handle some load testing, so I used artillery and this is the result:
 
 ![artillery load test result](images/artillery_load_test_result.png "artillery load test result")
