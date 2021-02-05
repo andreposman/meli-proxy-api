@@ -4,17 +4,17 @@
 
 ### Running the Project
 The API is running on Docker/docker-compose so you can run the following commands to start-up the project: 
-- **`make u`**  equivale a `docker-compose up`  
+- **`make u`**  equals to `docker-compose up`  
 
-- **`make d`**  equivale a `docker-compose down`  
+- **`make d`**  equals to `docker-compose down`  
 
-- **`make l`**  equivale a `docker-compose logs`  
+- **`make l`**  equals to `docker-compose logs`  
 
-- **`make r`**  equivale a `docker-compose down && docker-compose up --build && docker-compose logs -f`  
+- **`make r`**  equals to `docker-compose down && docker-compose up --build && docker-compose logs -f`  
 
-- **`make db`** equivale a `docker-compose up redis`
+- **`make db`** equals to `docker-compose up redis`
 
-- **`make mq`** equivale a `docker-compose up broker`
+- **`make mq`** equals to `docker-compose up broker`
 
 I am also sharing the Postman collection that I created for the project, below:
 <br>
