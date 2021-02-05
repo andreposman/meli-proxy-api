@@ -4,8 +4,8 @@
   "description": "Meli code challenge",
   "main": "server.js",
   "scripts": {
-    "test": "jest --force-exit",
-    "start": " node ./src/server.js",
+    "test": "jest --force-exit --coverage",
+    "start": "node ./src/server.js",
     "dev": "NODE_ENV=dev nodemon ./src/server.js "
   },
   "repository": {
