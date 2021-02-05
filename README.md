@@ -1,6 +1,8 @@
 # **meli-proxy-api**
-## Running the Project
 
+<br>
+
+### Running the Project
 The API is running on Docker/docker-compose so you can run the following commands to start-up the project: 
 - **`make u`**  equivale a `docker-compose up`  
 
@@ -26,7 +28,6 @@ If you want to run just the tests, open three terminals and do the following:
 - **`npm test`**
 
 ---
-<br>
 
 ### **Challenge Requirements**
 >Implementar um "proxy de apis" com os seguintes requisitos (em ordem de importância):
@@ -51,9 +52,8 @@ If you want to run just the tests, open three terminals and do the following:
 >     ● A interface para estatísticas e controle deveria prover APIs Rest.
 >     ● Um desenho simples de arquitetura da solução e  documentação (README) conta muito
 ---
-## **Solution**
 
-<br>
+### **Solution**
 
 ### **Architecure** 
 
@@ -102,7 +102,7 @@ I believe that I complicated and over-engineered the tools and solutions in rela
     <summary> *This the looong version.*</summary>
 <p>
 The first of many roadblocks was the language used to develop this application. 
-My first thought was to write in Golang because of performance, but I was afraid that I would not be able to develop the core of the functionalities in time for the deadline since I had a lot more to learn. I opted for Javascript/Node because I'm more proficient in it and would less of an obstacle compared to Golang, but if you have the time, here is a personal project still in development written by me in Golang.(https://github.com/andreposman/magic-number)
+My first thought was to write in Golang because of performance, but I was afraid that I would not be able to develop the core of the functionalities in time for the deadline since I had a lot more to learn. I opted for Javascript/Node because I'm more proficient in it and would less of an obstacle compared to Golang, but if you have the time, here is a personal project still in development written by me in Golang: https://github.com/andreposman/magic-number
 
 
 My next problem was to choose what MQ to use between RabbitMQ, Kafka, or even Redis with a Pub/Sub (that I didn't know was possible). After some research, I choose Kafka as my MQ/Streaming Service because of its scalability, high-performance, and high-throughput. But in hindsight, it was a bit of an overkill and over-engineering, which I should have avoided since it was my first time implementing an MQ. If I could start again, I would have chosen Redis or RabbitMQ. 
