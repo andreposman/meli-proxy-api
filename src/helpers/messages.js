@@ -1,4 +1,4 @@
-const { TOO_MANY_REQUESTS } = require('http-status-codes').StatusCodes;
+const { TOO_MANY_REQUESTS, FORBIDDEN } = require('http-status-codes').StatusCodes;
 require('dotenv').config()
 
 
@@ -23,6 +23,10 @@ const ERROR_MESSAGES = {
     BLOCKED_IP_PATH: {
         status: TOO_MANY_REQUESTS,
         message: `The ${IP_PATH_WINDOW_SIZE_IN_SECONDS} requests that you made, are too many! You are blocked for ${IP_PATH_MAX_WINDOW_REQUEST_COUNT} seconds.`
+    },
+    BLACK_LISTED: {
+        status: FORBIDDEN,
+        message: `You are blacklisted.`
     }
 }
 

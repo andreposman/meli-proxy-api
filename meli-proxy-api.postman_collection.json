@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "39b93dcc-1316-46cd-ac53-b301b188212d",
+		"name": "meli-proxy-api",
+		"description": "To this collection run properly, start the app using docker-compose up and the go to Postman settings and add localhost:3000 as your proxy, so the it can listen to requests.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.mercadolivre.com/products",
+					"host": [
+						"api",
+						"mercadolivre",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.mercadolivre.com/comments",
+					"host": [
+						"api",
+						"mercadolivre",
+						"com"
+					],
+					"path": [
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.mercadolivre.com/profile",
+					"host": [
+						"api",
+						"mercadolivre",
+						"com"
+					],
+					"path": [
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /randomPath",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.mercadolivre.com/commentsss",
+					"host": [
+						"api",
+						"mercadolivre",
+						"com"
+					],
+					"path": [
+						"commentsss"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

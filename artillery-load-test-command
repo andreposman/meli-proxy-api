@@ -1,0 +1,3 @@
+# c- 1 user -n 50000 reqs
+# output json report
+$(npm bin)/artillery quick --output report.json -c 1 -n 50000 http://localhost:3000/products
