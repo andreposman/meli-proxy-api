@@ -55,11 +55,11 @@ If you want to run just the tests, open three terminals and do the following:
 
 ### **Solution**
 
-### **Architecure** 
+### **Architecture** 
 
-I drew up this solution after some thinking and researching. I tried to follow the most that I could of the 12 Factors, to make the solution the most scalable I could think of, maintaining performance since the proxy should sustain 50k requests. 
+I drew up this solution after some thinking and researching. I tried to follow the most that I could of the 12 Factors and also trying to make the solution the most scalable as I could think of, maintaining performance since the proxy should sustain 50k requests. 
         
-![meli-proxy architecture](images/meli_proxy_architecure.jpg "meli-proxy architecture")
+![meli-proxy architecture](images/meli_proxy_architecture.jpg "meli-proxy architecture")
 
 <br>
 
