@@ -123,10 +123,6 @@ I left testing for last in the application development-cycle so with the time th
 
 <br>
 
-### Jest results
-
-<br>
-
 ### Test Suites
 
 ![jest-results](images/jest-results.png "jest-results")
