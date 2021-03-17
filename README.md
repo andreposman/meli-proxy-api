@@ -138,11 +138,8 @@ I left testing for last in the application development-cycle so with the time th
 ![jest-async-error](images/jest_async_error.png "jest async error")
 
 <br>
-<br>
 
 ### Load Test
-<br>
-
 Even though it was not necessary I was curious about how my application would handle some load testing, so I used artillery and this is the result:
 
 ![artillery load test result](images/artillery_load_test_result.png "artillery load test result")
