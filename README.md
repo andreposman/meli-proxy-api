@@ -49,8 +49,10 @@ If you want to run just the tests, open three terminals and do the following:
 > Não faremos testes de carga, mas avaliaremos se a arquitetura utilizada é escalável o suficiente.
 > 
 > Alguns desejáveis:
->     ● A interface para estatísticas e controle deveria prover APIs Rest.
->     ● Um desenho simples de arquitetura da solução e  documentação (README) conta muito
+>
+> ● A interface para estatísticas e controle deveria prover APIs Rest.
+>     
+> ● Um desenho simples de arquitetura da solução e  documentação (README) conta muito
 ---
 
 ### **Solution**

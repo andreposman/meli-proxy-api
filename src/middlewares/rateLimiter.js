@@ -56,7 +56,6 @@ const rateLimitByIp = (req, res, next) => {
                     return entry.requestTimeStamp > windowStartTimestamp;
                 });
 
-                console.log(`\n Request in Window: ${requestsWithinWindow}`);
 
                 let totalWindowRequestsCount = requestsWithinWindow.reduce((accumulator, entry) => {
                     return accumulator + entry.requestCount;
@@ -135,7 +134,6 @@ const rateLimitByPath = (req, res, next) => {
                     return entry.requestTimeStamp > windowStartTimestamp;
                 });
 
-                console.log(`\n Path - Request in Window: ${requestsWithinWindow}`);
 
                 let totalWindowRequestsCount = requestsWithinWindow.reduce((accumulator, entry) => {
                     return accumulator + entry.requestCount;
@@ -213,7 +211,6 @@ const rateLimitByPathIp = (req, res, next) => {
                     return entry.requestTimeStamp > windowStartTimestamp;
                 });
 
-                console.log(`\n PathIP - Request in Window: ${requestsWithinWindow}`);
 
                 let totalWindowRequestsCount = requestsWithinWindow.reduce((accumulator, entry) => {
                     return accumulator + entry.requestCount;
